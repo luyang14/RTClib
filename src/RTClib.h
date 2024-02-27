@@ -364,6 +364,32 @@ public:
 
 /**************************************************************************/
 /*!
+    @brief  RTC based on the HT1381 chip 
+*/
+/**************************************************************************/
+class RTC_HT1381 : RTC_I2C {
+public:
+  void setSCL_pin(uint8_t scl);
+  void setIO_pin(uint8_t io);
+  void setRST_pin(uint8_t rst);
+  void WriteData(uint8_t ucAddress, uint8_t ucData);
+  uint8_t ReadData(uint8_t ucAddress);
+  boolean begin(void);
+  boolean begin(uint8_t rst,uint8_t io,uint8_t scl);
+  void adjust(const DateTime& dt);
+  DateTime now();
+  
+private:
+  uint8_t scl_pin;
+  uint8_t rst_pin;
+  uint8_t io_pin;
+
+  void Delay(uint16_t ns);
+  void WriteByte(uint8_t ucDat);
+  uint8_t ReadByte(void);
+};
+/**************************************************************************/
+/*!
     @brief  RTC based on the DS3231 chip connected via I2C and the Wire library
 */
 /**************************************************************************/
